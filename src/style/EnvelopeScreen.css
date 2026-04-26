@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&display=swap');
 
 /* ══════════════════════════════
-   PAGE
+   RESET & PAGE
 ══════════════════════════════ */
 *,
 *::before,
@@ -23,7 +23,7 @@
     cursor: pointer;
 }
 
-/* Creamy linen background — exactly like reference photos */
+/* Creamy linen background */
 .env-bg {
     position: fixed;
     inset: 0;
@@ -35,31 +35,20 @@
     content: '';
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(ellipse 70% 50% at 50% 50%, #EDE7DC 0%, #F2EDE4 40%, #EAE3D8 100%);
+    background: radial-gradient(ellipse 70% 50% at 50% 50%, #EDE7DC 0%, #F2EDE4 40%, #EAE3D8 100%);
 }
 
-/* Subtle paper texture via repeating lines */
 .env-bg::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-        repeating-linear-gradient(0deg,
-            transparent,
-            transparent 40px,
-            rgba(180, 160, 130, 0.04) 40px,
-            rgba(180, 160, 130, 0.04) 41px),
-        repeating-linear-gradient(90deg,
-            transparent,
-            transparent 40px,
-            rgba(180, 160, 130, 0.03) 40px,
-            rgba(180, 160, 130, 0.03) 41px);
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(180,160,130,0.04) 40px, rgba(180,160,130,0.04) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(180,160,130,0.03) 40px, rgba(180,160,130,0.03) 41px);
 }
 
-
 /* ══════════════════════════════
-   SCENE & WRAPPER
+   SCENE
 ══════════════════════════════ */
 .env-scene {
     position: relative;
@@ -67,114 +56,111 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    padding: 24px;
 }
 
 .env-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: clamp(24px, 4vw, 40px);
     animation: sceneIn 1.4s cubic-bezier(.16, 1, .3, 1) 0.2s both;
+    /* ключевое: никакого transform-origin хаоса — просто стабильный центр */
+    transform-origin: center center;
 }
 
 @keyframes sceneIn {
     from {
         opacity: 0;
-        transform: scale(0.93) translateY(30px);
+        transform: translateY(28px) scale(0.96);
     }
-
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
-/* Zoom-out on open */
-.env-page.zoom .env-wrapper {
-    animation: zoomOut 0.9s cubic-bezier(.4, 0, 1, 1) forwards;
+/* ── Открытие: конверт плавно уходит вверх и тает ── */
+.env-wrapper.opening {
+    animation: envelopeOpen 1.3s cubic-bezier(.4, 0, .25, 1) 0.05s forwards;
 }
 
-@keyframes zoomOut {
-    from {
-        transform: scale(1);
+@keyframes envelopeOpen {
+    0% {
         opacity: 1;
+        transform: translateY(0) scale(1);
     }
-
-    to {
-        transform: scale(1.5);
+    40% {
+        /* небольшой «вдох» вниз — ощущение физики */
+        opacity: 1;
+        transform: translateY(6px) scale(0.99);
+    }
+    100% {
         opacity: 0;
+        transform: translateY(-40px) scale(0.97);
     }
 }
 
 /* ══════════════════════════════
-   ENVELOPE DROP SHADOW
+   ENVELOPE SHADOW
 ══════════════════════════════ */
 .env-shadow {
     position: absolute;
-    bottom: -28px;
+    bottom: -24px;
     left: 5%;
     width: 90%;
-    height: 36px;
-    background: radial-gradient(ellipse, rgba(100, 80, 50, 0.28) 0%, transparent 70%);
+    height: 32px;
+    background: radial-gradient(ellipse, rgba(100,80,50,0.26) 0%, transparent 70%);
     filter: blur(10px);
     z-index: 0;
     pointer-events: none;
+    /* тень тоже не двигается отдельно */
 }
 
 /* ══════════════════════════════
-   ENVELOPE BODY
+   ENVELOPE BODY — полностью responsive
 ══════════════════════════════ */
 .env-body {
     position: relative;
-    width: 580px;
-    height: 420px;
+    /* Адаптивный размер: на маленьких экранах — 92vw, на больших — 580px */
+    width: clamp(280px, 92vw, 580px);
+    /* Соотношение сторон 580:420 ≈ 1.38 */
+    aspect-ratio: 580 / 420;
+    height: auto;
 }
 
-/* Paper base */
 .env-paper {
     position: absolute;
     inset: 0;
     background: #EDE5D0;
     border-radius: 3px;
     box-shadow:
-        0 20px 60px rgba(80, 60, 30, 0.22),
-        0 6px 16px rgba(80, 60, 30, 0.12),
-        inset 0 1px 0 rgba(255, 245, 220, 0.6);
+        0 20px 60px rgba(80,60,30,0.22),
+        0 6px 16px rgba(80,60,30,0.12),
+        inset 0 1px 0 rgba(255,245,220,0.6);
     z-index: 1;
 }
 
-/* Triangle base mixin */
 .env-tri {
     position: absolute;
     z-index: 3;
 }
 
-/* ── Left triangle ── */
 .env-tri-left {
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 50%;
+    top: 0; left: 0; bottom: 0; right: 50%;
     clip-path: polygon(0 0, 100% 50%, 0 100%);
     background: linear-gradient(135deg, #D6C9A8 0%, #C8B990 60%, #BFB080 100%);
 }
 
-/* ── Right triangle ── */
 .env-tri-right {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 50%;
+    top: 0; right: 0; bottom: 0; left: 50%;
     clip-path: polygon(0 50%, 100% 0, 100% 100%);
     background: linear-gradient(225deg, #CBBF9A 0%, #C0B285 50%, #B8A878 100%);
 }
 
-/* ── Bottom triangle ── */
 .env-tri-bottom {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 55%;
+    bottom: 0; left: 0; right: 0; height: 55%;
     clip-path: polygon(0 100%, 100% 100%, 50% 0);
     background: linear-gradient(180deg, #C8BC96 0%, #D2C6A2 100%);
 }
@@ -182,18 +168,16 @@
 /* ── Top flap ── */
 .env-flap {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 55%;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     background: linear-gradient(170deg, #E0D5B5 0%, #CEC09A 50%, #C4B48C 100%);
     transform-origin: top center;
     transform-style: preserve-3d;
-    transition: transform 0.85s cubic-bezier(.4, 0, .2, 1);
+    /* плавное открытие крышки без рывков */
+    transition: transform 0.9s cubic-bezier(.4, 0, .2, 1);
     z-index: 10;
-    /* Soft crease shadow at bottom of flap */
-    filter: drop-shadow(0 4px 8px rgba(100, 80, 40, 0.18));
+    filter: drop-shadow(0 4px 8px rgba(100,80,40,0.15));
 }
 
 .env-flap.open {
@@ -204,9 +188,7 @@
     position: absolute;
     inset: 0;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
-    background: linear-gradient(150deg,
-            rgba(255, 248, 230, 0.15) 0%,
-            transparent 50%);
+    background: linear-gradient(150deg, rgba(255,248,230,0.15) 0%, transparent 50%);
 }
 
 .env-flap-crease {
@@ -216,14 +198,11 @@
     transform: translateX(-50%);
     width: 2px;
     height: 60%;
-    background: linear-gradient(to bottom,
-            transparent,
-            rgba(150, 120, 60, 0.12) 50%,
-            transparent);
+    background: linear-gradient(to bottom, transparent, rgba(150,120,60,0.12) 50%, transparent);
 }
 
 /* ══════════════════════════════
-   WAX SEAL
+   WAX SEAL — чистое исчезновение, без хаоса
 ══════════════════════════════ */
 .env-seal-wrap {
     position: absolute;
@@ -231,43 +210,34 @@
     left: 50%;
     transform: translate(-50%, -22%);
     z-index: 20;
-    transition: transform 0.4s ease, opacity 0.3s ease;
-    cursor: pointer;
+    /* мягкий hover — без резких движений */
+    transition: transform 0.35s cubic-bezier(.25, 0, .25, 1),
+                opacity 0.35s ease;
 }
 
 .env-seal-wrap:hover {
-    transform: translate(-50%, -22%) scale(1.04);
+    transform: translate(-50%, -22%) scale(1.03);
 }
 
+/* ── Аккуратное угасание печати ── */
 .env-seal-wrap.seal-gone {
-    animation: sealPop 0.55s cubic-bezier(.4, 0, 1, 1) forwards;
+    animation: sealFade 0.45s cubic-bezier(.4, 0, 1, 1) forwards;
 }
 
-@keyframes sealPop {
+@keyframes sealFade {
     0% {
-        transform: translate(-50%, -22%) scale(1) rotate(0deg);
         opacity: 1;
+        transform: translate(-50%, -22%) scale(1);
     }
-
-    35% {
-        transform: translate(-50%, -22%) scale(1.18) rotate(-10deg);
-        opacity: 1;
-    }
-
-    70% {
-        transform: translate(-50%, -35%) scale(0.7) rotate(18deg);
-        opacity: 0.4;
-    }
-
     100% {
-        transform: translate(-50%, -50%) scale(0) rotate(30deg);
         opacity: 0;
+        transform: translate(-50%, -22%) scale(0.72);
     }
 }
 
 .env-seal {
-    width: 148px;
-    height: 148px;
+    width: clamp(100px, 25vw, 148px);
+    height: clamp(100px, 25vw, 148px);
     border-radius: 50%;
     position: relative;
     display: flex;
@@ -275,24 +245,17 @@
     justify-content: center;
 }
 
-/* Bumpy outer ring — matches photo perfectly */
 .seal-outer-ring {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     background: radial-gradient(circle at 38% 32%,
-            #F0D870 0%,
-            #D4A820 20%,
-            #B88A10 45%,
-            #9A6E08 65%,
-            #7A5200 85%,
-            #5A3800 100%);
+        #F0D870 0%, #D4A820 20%, #B88A10 45%, #9A6E08 65%, #7A5200 85%, #5A3800 100%);
     box-shadow:
-        0 10px 40px rgba(80, 55, 10, 0.55),
-        0 4px 12px rgba(80, 55, 10, 0.35),
-        inset 0 4px 16px rgba(255, 225, 80, 0.25),
-        inset 0 -6px 16px rgba(40, 20, 0, 0.35);
-    /* Bumpy edge via border + noise-like effect */
+        0 10px 40px rgba(80,55,10,0.55),
+        0 4px 12px rgba(80,55,10,0.35),
+        inset 0 4px 16px rgba(255,225,80,0.25),
+        inset 0 -6px 16px rgba(40,20,0,0.35);
 }
 
 .seal-outer-ring::before {
@@ -301,36 +264,28 @@
     inset: 8px;
     border-radius: 50%;
     background: radial-gradient(circle at 40% 35%,
-            #E8C840 0%,
-            #C8980C 30%,
-            #A87808 60%,
-            #886006 100%);
+        #E8C840 0%, #C8980C 30%, #A87808 60%, #886006 100%);
     box-shadow:
-        inset 0 3px 10px rgba(255, 230, 80, 0.2),
-        inset 0 -4px 10px rgba(30, 15, 0, 0.3);
+        inset 0 3px 10px rgba(255,230,80,0.2),
+        inset 0 -4px 10px rgba(30,15,0,0.3);
 }
 
-/* Main disc */
 .seal-disc {
     position: relative;
-    width: 132px;
-    height: 132px;
+    width: clamp(88px, 22vw, 132px);
+    height: clamp(88px, 22vw, 132px);
     border-radius: 50%;
     background: radial-gradient(circle at 40% 35%,
-            #DFBA38 0%,
-            #C09018 35%,
-            #A87010 65%,
-            #8A5808 100%);
+        #DFBA38 0%, #C09018 35%, #A87010 65%, #8A5808 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow:
-        inset 0 3px 12px rgba(255, 230, 80, 0.22),
-        inset 0 -5px 12px rgba(30, 15, 0, 0.28);
+        inset 0 3px 12px rgba(255,230,80,0.22),
+        inset 0 -5px 12px rgba(30,15,0,0.28);
     z-index: 2;
 }
 
-/* Crest SVG */
 .seal-crest {
     position: absolute;
     inset: 0;
@@ -339,18 +294,17 @@
     border-radius: 50%;
 }
 
-/* JA monogram */
 .seal-monogram {
     position: relative;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
+    font-size: clamp(24px, 6vw, 38px);
     font-style: italic;
     font-weight: 300;
-    color: rgba(255, 240, 140, 0.92);
+    color: rgba(255,240,140,0.92);
     letter-spacing: -3px;
     text-shadow:
-        0 2px 6px rgba(50, 25, 0, 0.55),
-        0 0 16px rgba(255, 210, 50, 0.2);
+        0 2px 6px rgba(50,25,0,0.55),
+        0 0 16px rgba(255,210,50,0.2);
     z-index: 3;
     user-select: none;
 }
@@ -363,12 +317,12 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    animation: hintBob 2s ease-in-out infinite;
+    animation: hintBob 2.4s ease-in-out infinite;
 }
 
 .env-hint span {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
+    font-size: clamp(13px, 3.5vw, 16px);
     font-style: italic;
     color: #8A7050;
     letter-spacing: 0.12em;
@@ -377,37 +331,22 @@
 .env-hint-arrow {
     width: 42px;
     height: 42px;
-    border: 1.5px solid rgba(160, 130, 70, 0.5);
+    border: 1.5px solid rgba(160,130,70,0.5);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
-    color: rgba(160, 130, 70, 0.8);
-    box-shadow: 0 0 0 0 rgba(160, 130, 70, 0.3);
-    animation: hintRing 2s ease-in-out infinite;
+    color: rgba(160,130,70,0.8);
+    animation: hintRing 2.4s ease-in-out infinite;
 }
 
 @keyframes hintBob {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-7px); }
 }
 
 @keyframes hintRing {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(160, 130, 70, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 0 0 10px rgba(160, 130, 70, 0);
-    }
+    0%, 100% { box-shadow: 0 0 0 0   rgba(160,130,70,0.3); }
+    50%       { box-shadow: 0 0 0 10px rgba(160,130,70,0);   }
 }
