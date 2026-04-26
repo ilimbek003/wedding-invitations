@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import EnvelopeScreen from './components/Envelope/EnvelopeScreen'
-import InvitationScreen from './components/Envelope/Invitationscreen'
+import All from './components/Envelope/all'
 
 const App = () => {
-  const [screen, setScreen] = useState('envelope') // 'envelope' | 'invitation'
+  const [screen, setScreen] = useState('envelope') 
 
   return (
     <>
@@ -11,7 +11,7 @@ const App = () => {
         <EnvelopeScreen onOpen={() => setScreen('invitation')} />
       )}
       {screen === 'invitation' && (
-        <InvitationScreen onBack={() => setScreen('envelope')} />
+        <All onBack={() => setScreen('envelope')} />
       )}
     </>
   )
