@@ -74,8 +74,6 @@ const InvitationScreen = ({ onBack }) => {
     return () => clearTimeout(t);
   }, []);
 
-
-
   return (
     <div
       className={`inv-page ${visible ? "inv-in" : ""} ${dark ? "inv-dark" : "inv-light"}`}
@@ -114,6 +112,7 @@ const InvitationScreen = ({ onBack }) => {
             Нуриза <span className="hero-amp">&amp;</span> Сыймык
           </h1>
         </div>
+        <div className="overlay"></div>
       </div>
     </div>
   );
