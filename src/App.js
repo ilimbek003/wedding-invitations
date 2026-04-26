@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import EnvelopeScreen from './components/Envelope/EnvelopeScreen'
+import InvitationScreen from './components/Envelope/Invitationscreen'
 
-function App() {
+const App = () => {
+  const [screen, setScreen] = useState('envelope') // 'envelope' | 'invitation'
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {screen === 'envelope' && (
+        <EnvelopeScreen onOpen={() => setScreen('invitation')} />
+      )}
+      {screen === 'invitation' && (
+        <InvitationScreen onBack={() => setScreen('envelope')} />
+      )}
+    </>
+  )
 }
 
-export default App;
+export default App

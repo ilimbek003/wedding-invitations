@@ -1,13 +1,37 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@200;300;400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+:root {
+  --cream:        #f5f0e8;
+  --cream-dark:   #ede5d4;
+  --cream-deep:   #e0d5c0;
+  --parchment:    #f9f5ed;
+  --seal-base:    #e8dcc8;
+  --seal-shadow:  #c9b99a;
+  --seal-light:   #f7f2e8;
+  --burgundy:     #8b1a2e;
+  --brown:        #6b4226;
+  --brown-light:  #9a7050;
+  --gold:         #c8a96e;
+  --text-main:    #3d2b1a;
+  --text-muted:   #7a6048;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: var(--parchment);
+  font-family: 'Cormorant Garamond', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  width: 100%;
+  height: 100%;
 }
