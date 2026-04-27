@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../../style/EnvelopeScreen.css'
 
 const EnvelopeScreen = ({ onOpen }) => {
-  const [phase, setPhase] = useState('idle') // idle | opening | done
+  const [phase, setPhase] = useState('idle')
 
   const handleClick = () => {
     if (phase !== 'idle') return
@@ -21,10 +21,8 @@ const EnvelopeScreen = ({ onOpen }) => {
       <div className="env-scene" onClick={handleClick}>
         <div className={`env-wrapper ${phase}`}>
 
-          {/* Drop shadow */}
           <div className="env-shadow" />
 
-          {/* Main envelope body */}
           <div className="env-body">
 
             <div className="env-paper" />
@@ -32,13 +30,11 @@ const EnvelopeScreen = ({ onOpen }) => {
             <div className="env-tri env-tri-right" />
             <div className="env-tri env-tri-bottom" />
 
-            {/* Top flap */}
             <div className={`env-flap ${phase !== 'idle' ? 'open' : ''}`}>
               <div className="env-flap-paper" />
               <div className="env-flap-crease" />
             </div>
 
-            {/* Wax Seal */}
             <div className={`env-seal-wrap ${phase !== 'idle' ? 'seal-gone' : ''}`}>
               <div className="env-seal">
                 <div className="seal-outer-ring" />
@@ -69,11 +65,10 @@ const EnvelopeScreen = ({ onOpen }) => {
 
           </div>
 
-          {/* Hint */}
           {phase === 'idle' && (
             <div className="env-hint">
               <div className="env-hint-arrow">↑</div>
-              <span>Нажмите, чтобы открыть</span>
+              <span>Ачуу үчүн басыңыз</span>
             </div>
           )}
 

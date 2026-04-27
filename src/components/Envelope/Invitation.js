@@ -4,20 +4,20 @@ import '../../style/Invitation.css'
 const EVENTS = [
     {
         time: '15:20',
-        title: 'Регистрация',
-        desc: 'Приготовьте платочки для трогательного момента',
+        title: 'Каттоо',
+        desc: 'Таасирдүү учур үчүн жоолукчаңызды даярдаңыз',
         align: 'left',
     },
     {
         time: '16:00',
         title: 'Банкет',
-        desc: 'Время вкусной еды, танцев и развлечений',
+        desc: 'Даамдуу тамак, бий жана көңүл ачуу убактысы',
         align: 'right',
     },
     {
         time: '22:00',
-        title: 'Завершение',
-        desc: 'Мы благодарны, что Вы провели с нами этот чудесный день!',
+        title: 'Аяктоо',
+        desc: 'Бул керемет күндү биз менен өткөргөнүңүз үчүн чоң рахмат!',
         align: 'left',
     },
 ]
@@ -63,11 +63,10 @@ const Invitation = () => {
         <div className='invitation-container' ref={containerRef}>
 
             <h1 className='invitation-title anim-title' ref={titleRef}>
-                ПРОГРАММА ДНЯ
+                КҮН ПРОГРАММАСЫ
             </h1>
 
             <div className='invitation-body'>
-                {/* Волнистая линия */}
                 <div className='timeline-wrap' ref={lineRef}>
                     <svg className='timeline-svg' viewBox='0 0 60 900' preserveAspectRatio='none'>
                         <path
@@ -80,7 +79,6 @@ const Invitation = () => {
                     </div>
                 </div>
 
-                {/* События */}
                 <div className='events-list'>
                     {EVENTS.map((ev, i) => (
                         <div
@@ -97,13 +95,12 @@ const Invitation = () => {
                 </div>
             </div>
 
-            {/* ── ЛОКАЦИЯ ── */}
             <div className='location-section anim-location' ref={locationRef}>
-                <h2 className='location-heading'>ЛОКАЦИЯ</h2>
+                <h2 className='location-heading'>ЖАЙГАШКАН ЖЕР</h2>
 
                 <p className='location-address'>
-                    Ресторан "Хан Ордо "<br />
-                    Улица Кулбаева, 39а, с. Ала-Бука, Ала-Букинский район, Джалал-Абадская область,<br />
+                    Ресторан "Хан Ордо"<br />
+                    Кулбаев көчөсү, 39а, Ала-Бука айылы, Ала-Бука району, Жалал-Абад облусу<br />
                 </p>
 
                 <button className='map-btn' onClick={() => setMapOpen(p => !p)}>

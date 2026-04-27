@@ -79,13 +79,13 @@ const InvitationScreen = ({ onBack }) => {
       className={`inv-page ${visible ? "inv-in" : ""} ${dark ? "inv-dark" : "inv-light"}`}
     >
       <button className="inv-back" onClick={onBack}>
-        ← Назад
+        ← Артка
       </button>
 
       <button
         className="theme-toggle"
         onClick={() => setDark((d) => !d)}
-        aria-label="Сменить тему"
+        aria-label="Теманы өзгөртүү"
       >
         <div className="toggle-track">
           <span className="t-icon t-sun">☀</span>
@@ -95,10 +95,10 @@ const InvitationScreen = ({ onBack }) => {
       </button>
 
       <div className="hero-section">
-        <img src={palaceDay} alt="day" className="palace-img palace-img-day" />
+        <img src={palaceDay} alt="күндүз" className="palace-img palace-img-day" />
         <img
           src={palaceNight}
-          alt="night"
+          alt="түнкү"
           className={`palace-img palace-img-night ${dark ? "visible" : ""}`}
         />
 

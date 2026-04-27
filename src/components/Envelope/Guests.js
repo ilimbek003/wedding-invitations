@@ -5,10 +5,10 @@ const MAY_2026 = {
     monthName: 'МАЙ 2026',
     startDay: 5,
     totalDays: 31,
-    highlighted: 16, 
+    highlighted: 16,
 }
 
-const WEEKDAYS = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']
+const WEEKDAYS = ['ДШ', 'СШ', 'ШР', 'БШ', 'ЖМ', 'ИШ', 'ЖК']
 
 const Guests = () => {
     const titleRef = useRef(null)
@@ -25,16 +25,13 @@ const Guests = () => {
             },
             { threshold: 0.15 }
         )
-        ;[titleRef, textRef, calRef].forEach((r) => r.current && observer.observe(r.current))
+            ;[titleRef, textRef, calRef].forEach((r) => r.current && observer.observe(r.current))
         return () => observer.disconnect()
     }, [])
 
-    // Строим сетку дней
     const cells = []
-    // пустые ячейки до первого дня
     for (let i = 0; i < MAY_2026.startDay; i++) cells.push(null)
     for (let d = 1; d <= MAY_2026.totalDays; d++) cells.push(d)
-    // дополняем до кратности 7
     while (cells.length % 7 !== 0) cells.push(null)
 
     const weeks = []
@@ -43,12 +40,11 @@ const Guests = () => {
     return (
         <div className='guests-container'>
             <h1 className='guests-title animate-from-top' ref={titleRef}>
-                ДОРОГИЕ ГОСТИ!
+                Кымбаттуу коноктор!
             </h1>
 
             <p className='guests-text animate-from-left' ref={textRef}>
-                В нашей жизни произойдет очень важное событие&nbsp;– наша свадьба!
-                Мы верим и надеемся, что этот день станет красивым началом долгой и счастливой жизни.
+                Жашообуздагы эң бактылуу күн – биздин үйлөнүү тоюбуз жакындап калды! Бул күн биздин узак өмүрлүү, бактылуу үй-бүлөлүк жашообуздун жаркын башталышы болорун чоң үмүт менен күтөбүз.
             </p>
 
             <div className='calendar animate-from-bottom' ref={calRef}>

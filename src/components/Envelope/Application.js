@@ -4,129 +4,79 @@ import '../../style/Application.css'
 const ADMIN_PASSWORD = 'owner2024'
 const STORAGE_KEY = 'event_responses'
 
-
 const storage = {
   load() {
     console.log('%c[STORAGE] load() called', 'color:#8b6f5a;font-weight:bold')
-
-    if (typeof window === 'undefined') {
-      console.error('[STORAGE] ❌ window is undefined — not running in browser')
-      return []
-    }
-
-    if (!window.localStorage) {
-      console.error('[STORAGE] ❌ localStorage is not available in this browser')
-      return []
-    }
-
+    if (typeof window === 'undefined') { console.error('[STORAGE] ❌ window is undefined'); return [] }
+    if (!window.localStorage) { console.error('[STORAGE] ❌ localStorage is not available'); return [] }
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
-      console.log('[STORAGE] raw value from localStorage:', raw)
-
-      if (!raw) {
-        console.log('[STORAGE] ℹ️ No data found — returning empty array')
-        return []
-      }
-
+      console.log('[STORAGE] raw value:', raw)
+      if (!raw) { console.log('[STORAGE] ℹ️ No data found'); return [] }
       const parsed = JSON.parse(raw)
       console.log(`[STORAGE] ✅ Loaded ${parsed.length} records:`, parsed)
       return parsed
     } catch (err) {
       console.error('[STORAGE] ❌ JSON.parse failed:', err)
-      console.error('[STORAGE] ❌ Corrupted value:', localStorage.getItem(STORAGE_KEY))
       return []
     }
   },
 
   save(data) {
     console.log('%c[STORAGE] save() called', 'color:#8b6f5a;font-weight:bold')
-    console.log('[STORAGE] data to save:', data)
-
-    if (typeof window === 'undefined') {
-      console.error('[STORAGE] ❌ window is undefined — cannot save')
-      return false
-    }
-
-    if (!window.localStorage) {
-      console.error('[STORAGE] ❌ localStorage is not available — cannot save')
-      return false
-    }
-
+    if (typeof window === 'undefined') { console.error('[STORAGE] ❌ window is undefined'); return false }
+    if (!window.localStorage) { console.error('[STORAGE] ❌ localStorage is not available'); return false }
     try {
       const json = JSON.stringify(data)
-      console.log('[STORAGE] serialized JSON:', json)
-
       localStorage.setItem(STORAGE_KEY, json)
-
-      // Verify it actually saved
       const verify = localStorage.getItem(STORAGE_KEY)
-      if (verify === json) {
-        console.log(`[STORAGE] ✅ Saved & verified. Total records: ${data.length}`)
-        return true
-      } else {
-        console.error('[STORAGE] ❌ VERIFY FAILED — saved value does not match!')
-        console.error('[STORAGE] Expected:', json)
-        console.error('[STORAGE] Got:', verify)
-        return false
-      }
+      if (verify === json) { console.log(`[STORAGE] ✅ Saved. Total: ${data.length}`); return true }
+      else { console.error('[STORAGE] ❌ VERIFY FAILED'); return false }
     } catch (err) {
-      if (err.name === 'QuotaExceededError') {
-        console.error('[STORAGE] ❌ QuotaExceededError — localStorage is full!')
-      } else {
-        console.error('[STORAGE] ❌ Unexpected error in save():', err)
-      }
+      if (err.name === 'QuotaExceededError') console.error('[STORAGE] ❌ QuotaExceededError!')
+      else console.error('[STORAGE] ❌ Unexpected error:', err)
       return false
     }
   },
 
   clear() {
     console.log('%c[STORAGE] clear() called', 'color:#c0392b;font-weight:bold')
-    try {
-      localStorage.removeItem(STORAGE_KEY)
-      console.log('[STORAGE] ✅ Data cleared')
-      return true
-    } catch (err) {
-      console.error('[STORAGE] ❌ clear() failed:', err)
-      return false
-    }
+    try { localStorage.removeItem(STORAGE_KEY); console.log('[STORAGE] ✅ Cleared'); return true }
+    catch (err) { console.error('[STORAGE] ❌ clear() failed:', err); return false }
   }
 }
 
-// ─── CONSTANTS ───────────────────────────────────────────────────────────────
-
 const ATTENDANCE_OPTIONS = [
-  { value: 'yes',       label: 'Я с удовольствием приду' },
-  { value: 'with_pair', label: 'Буду со своей парой' },
-  { value: 'no',        label: 'К сожалению, не смогу присутствовать' },
-  { value: 'later',     label: 'Сообщу позже' },
+  { value: 'yes',       label: 'Мен кубануч менен келем' },
+  { value: 'with_pair', label: 'Жубайым менен келем' },
+  { value: 'no',        label: 'Өкүнүчтүүсү, катышалбайм' },
+  { value: 'later',     label: 'Кийинчерээк билдирем' },
 ]
 
 const SIDE_OPTIONS = [
-  { value: 'father',     label: 'Со стороны отца',   icon: '👨' },
-  { value: 'mother',     label: 'Со стороны матери', icon: '👩' },
-  { value: 'friends',    label: 'Друзья',             icon: '🤝' },
-  { value: 'colleagues', label: 'Коллеги',            icon: '💼' },
-  { value: 'neighbors',  label: 'Соседи',             icon: '🏡' },
+  { value: 'father',     label: 'Ата журт',   icon: '👨' },
+  { value: 'mother',     label: 'Эне журт',   icon: '👩' },
+  { value: 'friends',    label: 'Досторлор',         icon: '🤝' },
+  { value: 'colleagues', label: 'Кесиптештер',       icon: '💼' },
+  { value: 'neighbors',  label: 'Көршүлөр',          icon: '🏡' },
 ]
 
 const SIDE_LABELS = {
-  father:     'Со стороны отца',
-  mother:     'Со стороны матери',
-  friends:    'Друзья',
-  colleagues: 'Коллеги',
-  neighbors:  'Соседи',
+  father:     'Атанын жагынан',
+  mother:     'Эненин жагынан',
+  friends:    'Досторлор',
+  colleagues: 'Кесиптештер',
+  neighbors:  'Көршүлөр',
 }
 
 const ATTENDANCE_LABELS = {
-  yes:       'Приду',
-  with_pair: 'Приду с парой',
-  no:        'Не смогу',
-  later:     'Сообщу позже',
+  yes:       'Келем',
+  with_pair: 'Жубайым менен келем',
+  no:        'Катышалбайм',
+  later:     'Кийинчерээк билдирем',
 }
 
 const normalizeName = (n) => n.trim().toLowerCase().replace(/\s+/g, ' ')
-
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 export default function Application() {
   const [view,       setView]       = useState('form')
@@ -144,15 +94,12 @@ export default function Application() {
 
   useEffect(() => {
     console.log('%c[APP] Component mounted', 'color:#2c7a4b;font-weight:bold')
-    console.log('[APP] localStorage available:', !!window.localStorage)
     setTimeout(() => setMounted(true), 50)
   }, [])
 
   const loadResponses = () => {
-    console.log('%c[APP] loadResponses() called', 'color:#2c5fa1;font-weight:bold')
     const data = storage.load()
     setResponses(data)
-    console.log('[APP] responses state updated with', data.length, 'items')
   }
 
   const handleTitleClick = () => {
@@ -161,95 +108,57 @@ export default function Application() {
     clickTimer.current = setTimeout(() => { clickCount.current = 0 }, 1200)
     if (clickCount.current >= 5) {
       clickCount.current = 0
-      console.log('[APP] Admin panel triggered via title click')
       setView('admin-login')
     }
   }
 
   const validate = () => {
-    console.log('%c[VALIDATE] Running...', 'color:#7d5a00')
-    console.log('[VALIDATE] formData:', formData)
     const e = {}
     const parts = formData.name.trim().split(/\s+/)
     if (parts.length < 2 || parts.some(p => p.length < 2)) {
-      e.name = 'Введите имя и фамилию'
-      console.warn('[VALIDATE] ⚠️ name invalid — parts:', parts)
+      e.name = 'Атыңызды жана фамилияңызды жазыңыз'
     }
     if (!formData.attendance) {
-      e.attendance = 'Пожалуйста, выберите вариант'
-      console.warn('[VALIDATE] ⚠️ attendance not selected')
+      e.attendance = 'Сураныч, вариантты тандаңыз'
     }
     if (!formData.side) {
-      e.side = 'Пожалуйста, выберите вариант'
-      console.warn('[VALIDATE] ⚠️ side not selected')
+      e.side = 'Сураныч, вариантты тандаңыз'
     }
-    const valid = Object.keys(e).length === 0
-    console.log('[VALIDATE]', valid ? '✅ PASSED' : '❌ FAILED', e)
     setErrors(e)
-    return valid
+    return Object.keys(e).length === 0
   }
 
   const handleSubmit = () => {
-    console.log('%c[SUBMIT] handleSubmit() called', 'color:#2c1f14;font-weight:bold;font-size:13px')
-
-    if (!validate()) {
-      console.warn('[SUBMIT] ❌ Stopped — validation failed')
-      return
-    }
-
+    if (!validate()) return
     setIsLoading(true)
-
     const current = storage.load()
     const normalizedInput = normalizeName(formData.name)
-    console.log('[SUBMIT] Checking duplicate for:', normalizedInput)
-
     const idx = current.findIndex(r => normalizeName(r.name) === normalizedInput)
-    console.log('[SUBMIT] Duplicate index:', idx, idx >= 0 ? `(${current[idx].name})` : '(none)')
-
     const entry = {
       name:       formData.name.trim(),
       attendance: formData.attendance,
       side:       formData.side,
       timestamp:  new Date().toISOString(),
     }
-    console.log('[SUBMIT] Entry:', entry)
-
-    if (idx >= 0) {
-      current[idx] = entry
-      setIsUpdated(true)
-      console.log('[SUBMIT] ♻️ Updating record at index', idx)
-    } else {
-      current.push(entry)
-      setIsUpdated(false)
-      console.log('[SUBMIT] ➕ Adding new record. Total:', current.length)
-    }
-
-    const saved = storage.save(current)
-    console.log('[SUBMIT] Save result:', saved ? '✅ SUCCESS' : '❌ FAILED')
-
-    if (!saved) {
-      console.error('[SUBMIT] ❌ CRITICAL: Data was NOT saved. Check [STORAGE] errors above.')
-    }
-
+    if (idx >= 0) { current[idx] = entry; setIsUpdated(true) }
+    else { current.push(entry); setIsUpdated(false) }
+    storage.save(current)
     setIsLoading(false)
     setView('success')
   }
 
   const handleAdminLogin = () => {
-    console.log('[ADMIN] Login attempt')
     if (adminPass === ADMIN_PASSWORD) {
-      console.log('[ADMIN] ✅ Correct password')
       setAdminError('')
       setView('admin')
       loadResponses()
     } else {
-      console.warn('[ADMIN] ❌ Wrong password entered')
-      setAdminError('Неверный пароль')
+      setAdminError('Туура эмес сырсөз')
     }
   }
 
   const clearAllData = () => {
-    if (window.confirm('Удалить все данные?')) {
+    if (window.confirm('Бардык маалыматтарды жок кылуу?')) {
       storage.clear()
       setResponses([])
     }
@@ -268,90 +177,87 @@ export default function Application() {
     coming: responses.filter(r => r.attendance === 'yes' || r.attendance === 'with_pair').length,
   }
 
-  // ─── SUCCESS ────────────────────────────────────────────────────────────────
   if (view === 'success') {
     return (
       <div className={`app-wrapper ${mounted ? 'mounted' : ''}`}>
         <div className="card success-card">
           <div className="success-icon">✓</div>
           <h2 className="success-title">
-            {isUpdated ? 'Данные обновлены!' : 'Анкета отправлена!'}
+            {isUpdated ? 'Маалыматтар жаңыртылды!' : 'Анкета жиберилди!'}
           </h2>
           <p className="success-text">
             {isUpdated
-              ? 'Ваша запись была обновлена. Спасибо!'
-              : 'Спасибо, что заполнили анкету. Ждём вас на нашем торжестве!'}
+              ? 'Сиздин жазуу жаңыртылды. Рахмат!'
+              : 'Анкетаны толтурганыңыз үчүн рахмат. Сиздерди тоюбузда күтөбүз!'}
           </p>
           <button
             className="btn-outline"
             onClick={() => { setFormData({ name: '', attendance: '', side: '' }); setView('form') }}
           >
-            Вернуться
+            Артка кайтуу
           </button>
         </div>
       </div>
     )
   }
 
-  // ─── ADMIN LOGIN ─────────────────────────────────────────────────────────────
   if (view === 'admin-login') {
     return (
       <div className={`app-wrapper ${mounted ? 'mounted' : ''}`}>
         <div className="card admin-login-card">
-          <h2 className="admin-login-title">Доступ для организатора</h2>
+          <h2 className="admin-login-title">Уюштуруучуга кирүү</h2>
           <div className="field-wrap">
             <input
               type="password"
               className="text-input"
-              placeholder="Пароль"
+              placeholder="Сырсөз"
               value={adminPass}
               onChange={e => { setAdminPass(e.target.value); setAdminError('') }}
               onKeyDown={e => e.key === 'Enter' && handleAdminLogin()}
             />
           </div>
           {adminError && <p className="error-msg">{adminError}</p>}
-          <button className="btn-primary" onClick={handleAdminLogin}>Войти</button>
-          <button className="btn-ghost" onClick={() => setView('form')}>← Назад</button>
+          <button className="btn-primary" onClick={handleAdminLogin}>Кирүү</button>
+          <button className="btn-ghost" onClick={() => setView('form')}>← Артка</button>
         </div>
       </div>
     )
   }
 
-  // ─── ADMIN DASHBOARD ─────────────────────────────────────────────────────────
   if (view === 'admin') {
     const maxSide = Math.max(...Object.values(stats.side), 1)
     return (
       <div className={`app-wrapper admin-wrapper ${mounted ? 'mounted' : ''}`}>
         <div className="admin-container">
           <div className="admin-header">
-            <h1 className="admin-title">Статистика мероприятия</h1>
+            <h1 className="admin-title">Иш-чаранын статистикасы</h1>
             <div className="admin-header-actions">
-              <button className="btn-danger-sm" onClick={clearAllData}>Очистить</button>
-              <button className="btn-ghost-sm" onClick={() => setView('form')}>← Выйти</button>
+              <button className="btn-danger-sm" onClick={clearAllData}>Тазалоо</button>
+              <button className="btn-ghost-sm" onClick={() => setView('form')}>← Чыгуу</button>
             </div>
           </div>
 
           <div className="stats-grid">
             <div className="stat-card accent">
               <span className="stat-num">{stats.total}</span>
-              <span className="stat-label">Всего анкет</span>
+              <span className="stat-label">Бардык анкеталар</span>
             </div>
             <div className="stat-card">
               <span className="stat-num">{stats.coming}</span>
-              <span className="stat-label">Придут</span>
+              <span className="stat-label">Келишет</span>
             </div>
             <div className="stat-card">
               <span className="stat-num">{stats.attendance.no || 0}</span>
-              <span className="stat-label">Не смогут</span>
+              <span className="stat-label">Катышалбайт</span>
             </div>
             <div className="stat-card">
               <span className="stat-num">{stats.attendance.later || 0}</span>
-              <span className="stat-label">Сообщат позже</span>
+              <span className="stat-label">Кийинчерээк билдиришет</span>
             </div>
           </div>
 
           <div className="admin-section">
-            <h3 className="section-label">Состав гостей</h3>
+            <h3 className="section-label">Коноктордун курамы</h3>
             <div className="bar-chart">
               {SIDE_OPTIONS.map(o => (
                 <div key={o.value} className="bar-row">
@@ -370,7 +276,7 @@ export default function Application() {
           </div>
 
           <div className="admin-section">
-            <h3 className="section-label">Присутствие</h3>
+            <h3 className="section-label">Катышуу</h3>
             <div className="attendance-pills">
               {ATTENDANCE_OPTIONS.map(o => (
                 <div key={o.value} className="att-pill">
@@ -382,15 +288,15 @@ export default function Application() {
           </div>
 
           <div className="admin-section">
-            <h3 className="section-label">Все записи ({responses.length})</h3>
+            <h3 className="section-label">Бардык жазуулар ({responses.length})</h3>
             {responses.length === 0 ? (
-              <p className="empty-msg">Нет данных — проверьте Console (F12) на ошибки</p>
+              <p className="empty-msg">Маалымат жок — Console (F12) каталарды текшериңиз</p>
             ) : (
               <div className="table-wrap">
                 <table className="responses-table">
                   <thead>
                     <tr>
-                      <th>#</th><th>Имя</th><th>Присутствие</th><th>Сторона</th><th>Дата</th>
+                      <th>#</th><th>Аты</th><th>Катышуу</th><th>Тарап</th><th>Дата</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -417,7 +323,6 @@ export default function Application() {
     )
   }
 
-  // ─── MAIN FORM ───────────────────────────────────────────────────────────────
   return (
     <div className={`app-wrapper ${mounted ? 'mounted' : ''}`}>
       <div className="card form-card">
@@ -428,12 +333,12 @@ export default function Application() {
         </div>
 
         <div className={`field-group ${errors.name ? 'has-error' : ''}`}>
-          <label className="field-label">Напишите, пожалуйста, Ваши ФИО</label>
+          <label className="field-label">Сураныч, Атыңызды жана Фамилияңызды жазыңыз</label>
           <div className="input-wrap">
             <input
               type="text"
               className="text-input"
-              placeholder="Ваши ФИО"
+              placeholder="Атыңыз жана Фамилияңыз"
               value={formData.name}
               onChange={e => {
                 setFormData(p => ({ ...p, name: e.target.value }))
@@ -445,7 +350,7 @@ export default function Application() {
         </div>
 
         <div className={`field-group ${errors.attendance ? 'has-error' : ''}`}>
-          <label className="field-label">Сможете ли присутствовать на нашем торжестве?</label>
+          <label className="field-label">Биздин тоюбузга катыша аласызбы?</label>
           <div className="options-list">
             {ATTENDANCE_OPTIONS.map((opt, i) => (
               <label key={opt.value} className="radio-label" style={{ '--delay': `${i * 0.06}s` }}>
@@ -468,7 +373,7 @@ export default function Application() {
         </div>
 
         <div className={`field-group ${errors.side ? 'has-error' : ''}`}>
-          <label className="field-label">Вы приходите со стороны…</label>
+          <label className="field-label">Сиз кимдин жагынан келесиз…</label>
           <div className="side-grid">
             {SIDE_OPTIONS.map((opt, i) => (
               <button
@@ -494,7 +399,7 @@ export default function Application() {
           onClick={handleSubmit}
           disabled={isLoading}
         >
-          {isLoading ? <span className="spinner" /> : 'Отправить'}
+          {isLoading ? <span className="spinner" /> : 'Жиберүү'}
         </button>
 
       </div>

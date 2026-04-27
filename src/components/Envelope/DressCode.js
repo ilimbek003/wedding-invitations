@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../../style/DressCode.css'
 
-// Импорт картинок платьев и костюмов
-// У тебя должны быть эти файлы. Замени пути на свои.
 import dress1 from '../../images/dress1.jpg'
 import dress2 from '../../images/dress2.webp'
 import dress3 from '../../images/dress3.jpg'
@@ -12,11 +10,10 @@ import suit2 from '../../images/suit2.jpeg'
 import suit3 from '../../images/dress4.jpeg'
 import suit4 from '../../images/suit1.jpg'
 
-// Цвета палитры свадьбы (3 полоски шёлка)
 const PALETTE = [
-    { bg: '#b5906a', label: 'тёмно-бежевый' },
+    { bg: '#b5906a', label: 'кою бежевый' },
     { bg: '#c9a882', label: 'бежевый' },
-    { bg: '#e8d5b7', label: 'светло-бежевый' },
+    { bg: '#e8d5b7', label: 'ачык бежевый' },
 ]
 
 const WOMEN_SLIDES = [
@@ -41,10 +38,8 @@ const DressCode = () => {
     const slides = isWomen ? WOMEN_SLIDES : MEN_SLIDES
     const totalSlides = slides.length
 
-    // Сбрасываем слайд при переключении
     useEffect(() => { setSlideIdx(0) }, [isWomen])
 
-    // IntersectionObserver для анимаций
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
@@ -59,15 +54,12 @@ const DressCode = () => {
 
     return (
         <div className='dresscode-container'>
-            {/* Заголовок */}
             <h1 className='dresscode-title anim-drop' ref={titleRef}>ДРЕСС-КОД</h1>
 
-            {/* Подзаголовок */}
             <p className='dresscode-subtitle anim-fade-up' ref={textRef}>
-                Будем признательны, если вы поддержите цветовую гамму нашей свадьбы
+                Биздин үйлөнүү тоюбуздун түс гаммасын колдосоңуздар, абдан ыраазы болобуз
             </p>
 
-            {/* Палитра — 3 полоски */}
             <div className='palette anim-fade-up' ref={paletteRef}>
                 {PALETTE.map((c, i) => (
                     <div
@@ -78,17 +70,15 @@ const DressCode = () => {
                 ))}
             </div>
 
-            {/* Примечание про белый */}
             <p className='dresscode-note anim-fade-up' ref={noteRef}>
-                Милые дамы, будем благодарны, если в этот день белый цвет останется привилегией невесты.
+                Урматтуу айымдар, бул күнү ак түс жалгыз келинчектин артыкчылыгы болуп кала берсе, абдан ыраазы болобуз.
             </p>
 
-            {/* Тоггл Женщины / Мужчины */}
             <div className='toggle-wrap anim-fade-up' ref={galleryRef}>
                 <button
                     className={`toggle-btn${!isWomen ? ' active' : ''}`}
                     onClick={() => setIsWomen(false)}
-                    aria-label='Мужчины'
+                    aria-label='Эркектер'
                 />
                 <div
                     className={`toggle-track${isWomen ? ' women' : ' men'}`}
@@ -99,11 +89,10 @@ const DressCode = () => {
                 <button
                     className={`toggle-btn${isWomen ? ' active' : ''}`}
                     onClick={() => setIsWomen(true)}
-                    aria-label='Женщины'
+                    aria-label='Аялдар'
                 />
             </div>
 
-            {/* Слайдер */}
             <div className='slider-outer'>
                 <div
                     className='slider-track'
@@ -117,7 +106,6 @@ const DressCode = () => {
                     ))}
                 </div>
 
-                {/* Стрелки */}
                 {totalSlides > 1 && (
                     <>
                         <button className='slide-arrow slide-arrow-left' onClick={prevSlide}>‹</button>
@@ -125,7 +113,6 @@ const DressCode = () => {
                     </>
                 )}
 
-                {/* Точки */}
                 {totalSlides > 1 && (
                     <div className='slide-dots'>
                         {slides.map((_, i) => (

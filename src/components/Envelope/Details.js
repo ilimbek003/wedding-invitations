@@ -6,14 +6,14 @@ const ITEMS = [
     {
         align: 'left',
         icon: <GiftIcon />,
-        label: 'ПОДАРКИ',
-        text: 'Дорогие гости, приносите с собой веселье и радость в душе, а подарки — в конверте!',
+        label: 'БЕЛЕКТЕР',
+        text: 'Кымбаттуу коноктор, ичиңизде кубаныч жана шаттык алып келиңиз, ал эми белектерди — конвертке салып!',
     },
     {
         align: 'left',
         icon: <HeartIcon />,
-        label: 'ГОРЬКО',
-        text: 'От всего сердца просим вас воздержаться от криков "Горько!" и сохранить атмосферу уютного семейного праздника.',
+        label: 'АЧУУ',
+        text: 'Жүрөгүбүздүн тереңинен, "Ачуу!" деп кыйкырудан баш тартып, жылуу үй-бүлөлүк майрамдын маанайын сактап калууну өтүнөбүз.',
     },
 ]
 
@@ -33,12 +33,10 @@ const Details = () => {
 
     return (
         <div className='details-container'>
-            {/* Фоновый шёлк */}
             <img src={img} alt="" className='details-bg' />
 
-            {/* Серая пилюля-карточка */}
             <div className='details-card'>
-                <h2 className='details-title anim-fade-down' ref={titleRef}>ДЕТАЛИ</h2>
+                <h2 className='details-title anim-fade-down' ref={titleRef}>ЧОО-ЖАЙ</h2>
 
                 <div className='details-list'>
                     {ITEMS.map((item, i) => (
@@ -80,7 +78,6 @@ const Details = () => {
     )
 }
 
-/* ── SVG иконки ── */
 function GiftIcon() {
     return (
         <svg viewBox='0 0 48 48' fill='none' className='icon-svg'>

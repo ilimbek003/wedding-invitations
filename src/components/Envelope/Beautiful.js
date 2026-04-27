@@ -43,7 +43,7 @@ const Beautiful = () => {
         <div className='container'>
             <div className='flex-center'>
                 <div className='header-block' ref={dateRef}>
-                    <h1 className='names-title animate-fade-down'>Нуриза И Сыймык</h1>
+                    <h1 className='names-title animate-fade-down'>Нуриза жана Сыймык</h1>
                     <p className='wedding-date animate-fade-down delay-1'>16.05.26</p>
                 </div>
 
@@ -57,17 +57,17 @@ const Beautiful = () => {
                     </div>
 
                     <div className='tn-atom'>
-                        <img className='image' src={image} alt="фото пары" ref={photoRef} />
+                        <img className='image' src={image} alt="жуптун сүрөтү" ref={photoRef} />
                     </div>
                     <img className='img' src={img} alt='' />
                 </div>
 
                 <div className='text-section' ref={sectionRef}>
                     <p className='text-animate from-left' ref={textLeftRef}>
-                        В один <span className='highlight'>прекрасный день</span> что‑то случится.
+                        Бир <span className='highlight'>кереметтүү күн</span> келет.
                     </p>
                     <p className='text-animate from-right' ref={textRightRef}>
-                        Сразу и на всю жизнь…
+                        Бир заматта жана өмүр бою...
                     </p>
                 </div>
             </div>

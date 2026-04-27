@@ -40,31 +40,28 @@ const WillSay = () => {
 
     return (
         <div className='willsay-container'>
-            {/* Фоновое изображение с шёлком */}
             <img src={img} alt="" className='willsay-bg-img' ref={imgRef} />
 
-            {/* Контент */}
             <div className='willsay-content'>
                 <div className='willsay-top'>
-                    <p className='willsay-title animate-fade-right' ref={titleRef}>Мы скажем</p>
-                    <p className='willsay-subtitle animate-fade-left' ref={subtitleRef}>через...</p>
+                    <p className='willsay-title animate-fade-right' ref={titleRef}>Биздин үйлөнүү тоюбуз жакында</p>
+                    <p className='willsay-subtitle animate-fade-left' ref={subtitleRef}>Сиздерди күтүп жатабыз…</p>
                 </div>
 
-                {/* Таймер */}
                 <div className='willsay-timer animate-fade-up' ref={timerRef}>
                     <div className='timer-block'>
                         <span className='timer-num'>{time.days}</span>
-                        <span className='timer-label'>дней</span>
+                        <span className='timer-label'>күн</span>
                     </div>
                     <span className='timer-sep'>:</span>
                     <div className='timer-block'>
                         <span className='timer-num'>{pad(time.hours)}</span>
-                        <span className='timer-label'>часов</span>
+                        <span className='timer-label'>саат</span>
                     </div>
                     <span className='timer-sep'>:</span>
                     <div className='timer-block'>
                         <span className='timer-num'>{pad(time.minutes)}</span>
-                        <span className='timer-label'>минут</span>
+                        <span className='timer-label'>мүнөт</span>
                     </div>
                     <span className='timer-sep'>:</span>
                     <div className='timer-block'>
