@@ -93,16 +93,6 @@ function GiftIcon() {
     )
 }
 
-function AgeIcon() {
-    return (
-        <svg viewBox='0 0 48 48' fill='none' className='icon-svg'>
-            <circle cx='24' cy='24' r='18' stroke='#aaa' strokeWidth='1.4' />
-            <text x='14' y='30' fontSize='13' fill='#aaa' fontFamily='serif'>18</text>
-            <text x='30' y='20' fontSize='10' fill='#aaa' fontFamily='serif'>+</text>
-        </svg>
-    )
-}
-
 function HeartIcon() {
     return (
         <svg viewBox='0 0 48 48' fill='none' className='icon-svg'>
