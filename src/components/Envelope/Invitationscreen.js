@@ -109,7 +109,7 @@ const InvitationScreen = ({ onBack }) => {
         </div>
         <div className="hero-text">
           <h1 className="hero-names">
-            Нуриза <span className="hero-amp">&amp;</span> Сыймык
+            Сыймык <span className="hero-amp">&amp;</span> Нуриза
           </h1>
         </div>
         <div className="overlay"></div>

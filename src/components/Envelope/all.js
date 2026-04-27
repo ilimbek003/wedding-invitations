@@ -59,7 +59,7 @@ const All = () => {
             <div className='container'>
                 <div className='flex-center'>
                     <div className='header-block' ref={dateRef}>
-                        <h1 className='names-title animate-fade-down'>Нуриза жана Сыймык</h1>
+                        <h1 className='names-title animate-fade-down'>Сыймык жана Нуриза</h1>
                         <p className='wedding-date animate-fade-down delay-1'>16.05.26</p>
                     </div>
 

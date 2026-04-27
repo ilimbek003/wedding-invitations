@@ -43,7 +43,7 @@ const Beautiful = () => {
         <div className='container'>
             <div className='flex-center'>
                 <div className='header-block' ref={dateRef}>
-                    <h1 className='names-title animate-fade-down'>Нуриза жана Сыймык</h1>
+                    <h1 className='names-title animate-fade-down'>Сыймык жана Нуриза</h1>
                     <p className='wedding-date animate-fade-down delay-1'>16.05.26</p>
                 </div>
 
@@ -51,7 +51,7 @@ const Beautiful = () => {
                     <div className='media-card animate-scale-in'>
                         <video autoPlay muted loop playsInline className='video'>
                             <source src={mutedVideo} type="video/mp4" />
-                        </video>
+                        </video>    
                         <div className='corner-tl' />
                         <div className='corner-br' />
                     </div>
