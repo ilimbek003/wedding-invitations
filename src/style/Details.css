@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Philosopher:wght@400;700&display=swap');
+
+/* ── Контейнер ── */
+.details-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #f5f3ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 40px 16px;
+}
+
+/* ── Фоновый шёлк ── */
+.details-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.55;
+    pointer-events: none;
+    animation: silkDrift 16s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes silkDrift {
+    0%   { transform: scale(1) translate(0, 0); }
+    33%  { transform: scale(1.03) translate(-5px, -8px); }
+    66%  { transform: scale(1.02) translate(6px, -4px); }
+    100% { transform: scale(1) translate(0, 0); }
+}
+
+/* ── Серая пилюля ── */
+.details-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(230, 228, 224, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 48px;
+    width: 100%;
+    max-width: 340px;
+    padding: 40px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+/* ── Заголовок outline ── */
+.details-title {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(26px, 7vw, 38px);
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1px #888;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin: 0 0 36px;
+}
+
+/* ── Список деталей ── */
+.details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ── Строка ── */
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    position: relative;
+}
+
+.detail-left-side  { justify-content: flex-start; }
+.detail-right-side { justify-content: flex-end; }
+
+/* ── Иконка ── */
+.detail-icon-wrap {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+.icon-svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* ── Лейбл + стрелка ── */
+.detail-right,
+.detail-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.detail-right {
+    align-items: flex-start;
+}
+
+.detail-left {
+    align-items: flex-end;
+}
+
+.detail-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: #999;
+    line-height: 1;
+}
+
+.detail-label {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: 400;
+    color: transparent;
+    -webkit-text-stroke: 0.8px #888;
+    letter-spacing: 0.12em;
+}
+
+/* ── Текст (всегда виден, не hover) ── */
+.detail-tooltip {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(13px, 3vw, 13px);
+    font-weight: 300;
+    color: #444;
+    line-height: 1.55;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 220px;
+}
+
+.detail-tooltip-right {
+    align-self: flex-start;
+    text-align: left;
+}
+
+.detail-tooltip-left {
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* ── Scroll анимации ── */
+.anim-fade-down {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.anim-fade-down.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.anim-row {
+    opacity: 0;
+    transition: opacity 0.7s ease var(--delay, 0s), transform 0.7s ease var(--delay, 0s);
+}
+
+.detail-left.anim-row,
+.detail-row:nth-child(odd).anim-row  { transform: translateX(-28px); }
+.detail-row:nth-child(even).anim-row { transform: translateX(28px); }
+
+.anim-row.visible {
+    opacity: 1;
+    transform: translateX(0);
+}

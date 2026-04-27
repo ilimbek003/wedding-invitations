@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Tenor+Sans&display=swap');
+
+/* ─── Base ─── */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    font-family: 'Tenor Sans', sans-serif;
+    background: #f5f3ef;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 20px 0 0 0;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ─── Header ─── */
+.header-block {
+    width: 100%;
+    text-align: right;
+    padding: 28px 32px 0 32px;
+    position: relative;
+}
+
+.names-title {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: #1a1a1a;
+}
+
+.wedding-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: #3a3a3a;
+    margin-top: 4px;
+}
+
+/* ─── Media block ─── */
+.relative {
+    position: relative;
+    width: 90%;
+    max-width: 460px;
+    margin: 16px auto 0;
+}
+
+.media-card {
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.media-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    /* высота зоны растворения */
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            #f5f3ef 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Если нужен также градиент сверху */
+.media-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(to top,
+            transparent 0%,
+            rgba(245, 243, 239, 0.6) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.video {
+    width: 100%;
+    height: 457px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Corner accents like the reference image */
+.corner-tl {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    border-top: 2px solid rgba(255, 255, 255, 0.6);
+    border-left: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 4px 0 0 0;
+}
+
+.corner-br {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+    border-right: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 0 0 4px 0;
+}
+
+.image {
+    position: absolute;
+    top: -109px;
+    left: -77px;
+    width: 200px;
+    z-index: 9;
+}
+
+
+
+.img {
+    position: absolute;
+    bottom: -100px;
+    right: -90px;
+    width: 200px;
+    z-index: 9;
+}
+
+/* ─── Text section ─── */
+.text-section {
+    width: 90%;
+    max-width: 460px;
+    margin: 32px auto 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.text-animate {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 4.5vw, 20px);
+    font-weight: 300;
+    color: #1a1a1a;
+    line-height: 1.55;
+    opacity: 0;
+    transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.from-left {
+    transform: translateX(-48px);
+}
+
+.from-right {
+    transform: translateX(48px);
+}
+
+.text-animate.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.from-right.visible {
+    transition-delay: 0.15s;
+}
+
+.highlight {
+    background: rgba(180, 170, 155, 0.28);
+    padding: 0 4px;
+    border-radius: 2px;
+}
+
+/* ─── Header animations ─── */
+.animate-fade-down {
+    opacity: 0;
+    transform: translateY(-18px);
+    animation: fadeDown 0.8s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─── Card scale-in ─── */
+.animate-scale-in {
+    opacity: 0;
+    transform: scale(0.96);
+    animation: scaleIn 0.9s ease 0.35s forwards;
+}
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ─── Photo slide-in ─── */
+.image {
+    opacity: 0;
+    transform: translateX(-24px);
+    animation: slideInLeft 0.8s ease 0.7s forwards;
+}
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(-16px);
+    }
+}

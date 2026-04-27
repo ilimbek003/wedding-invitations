@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Philosopher:wght@400;700&display=swap');
+
+.invitation-container {
+    background: #f5f3ef;
+    width: 100%;
+    min-height: 100vh;
+    padding: 48px 0 80px;
+    overflow: hidden;
+}
+
+/* ── Заголовок outline ── */
+.invitation-title {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(28px, 8vw, 48px);
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1.4px #1a1a1a;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: 100px 0 48px;
+    line-height: 1.1;
+}
+
+/* ── Body: линия + события ── */
+.invitation-body {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.timeline-wrap {
+    position: relative;
+    flex: 0 0 60px;
+    align-self: stretch;
+}
+
+.timeline-svg {
+    width: 60px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.heart-scroll {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: top 0.1s linear;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.heart-svg-icon {
+    width: 36px;
+    height: 36px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.18));
+}
+
+/* ── Events ── */
+.events-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.event-item {
+    padding: 32px 20px 32px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.event-left {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 40px;
+}
+
+.event-right {
+    align-items: flex-end;
+    text-align: right;
+    padding-left: 40px;
+    padding-right: 20px;
+}
+
+.event-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 8vw, 44px);
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1;
+}
+
+.event-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 4px 0 0;
+}
+
+.event-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(12px, 3.5vw, 15px);
+    font-weight: 300;
+    color: #3a3a3a;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ── ЛОКАЦИЯ ── */
+.location-section {
+    width: 100%;
+    max-width: 480px;
+    margin: 64px auto 0;
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.location-heading {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(28px, 8vw, 46px);
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1.2px #1a1a1a;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: 0 0 28px;
+    line-height: 1.1;
+}
+
+.location-address {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 4vw, 17px);
+    font-weight: 400;
+    color: #1a1a1a;
+    text-align: center;
+    line-height: 1.7;
+    margin: 0 0 32px;
+}
+
+/* Кнопка КАРТА — прямоугольная рамка как на картинке */
+.map-btn {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(12px, 3.5vw, 15px);
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    color: #1a1a1a;
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    padding: 16px 48px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+.map-btn:hover {
+    background: #1a1a1a;
+    color: #f9f8f6;
+}
+
+/* ── Карта ── */
+.map-wrapper {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, margin-top 0.4s ease;
+    margin-top: 0;
+}
+
+.map-wrapper.map-open {
+    max-height: 400px;
+    margin-top: 24px;
+}
+
+.map-iframe {
+    width: 100%;
+    height: 380px;
+    border: none;
+    display: block;
+    border-radius: 4px;
+}
+
+/* ── Scroll animations ── */
+.anim-title {
+    opacity: 0;
+    transform: translateY(-24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.anim-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.anim-location {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.85s ease 0.1s, transform 0.85s ease 0.1s;
+}
+
+.anim-location.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.anim-item {
+    opacity: 0;
+    transition: opacity 0.7s ease var(--delay, 0s), transform 0.7s ease var(--delay, 0s);
+}
+
+.event-left.anim-item  { transform: translateX(-36px); }
+.event-right.anim-item { transform: translateX(36px); }
+
+.anim-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}

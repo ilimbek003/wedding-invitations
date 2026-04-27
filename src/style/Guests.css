@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Philosopher:wght@400;700&display=swap');
+
+/* ── Container ── */
+.guests-container {
+    background: #f5f3ef;
+    min-height: 0vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 24px 64px;
+    overflow-x: hidden;
+}
+
+/* ── Title — outline style как на картинке ── */
+.guests-title {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(32px, 9vw, 52px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-align: center;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #1a1a1a;
+    text-stroke: 1.5px #1a1a1a;
+    margin: 0 0 32px;
+    line-height: 1.1;
+}
+
+/* ── Body text ── */
+.guests-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 4vw, 18px);
+    font-weight: 400;
+    line-height: 1.7;
+    color: #1a1a1a;
+    text-align: center;
+    max-width: 340px;
+    margin: 0 0 44px;
+}
+
+/* ── Calendar ── */
+.calendar {
+    width: 100%;
+    max-width: 360px;
+}
+
+.calendar-month {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(26px, 7vw, 40px);
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1.2px #1a1a1a;
+    text-stroke: 1.2px #1a1a1a;
+    text-align: center;
+    letter-spacing: 0.08em;
+    margin: 0 0 20px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    width: 100%;
+}
+
+.cal-weekday {
+    font-family: 'Philosopher', sans-serif;
+    font-size: clamp(11px, 3vw, 14px);
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 8px 0;
+    letter-spacing: 0.04em;
+}
+
+.cal-day {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: 400;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 10px 2px;
+    position: relative;
+}
+
+.cal-day.empty {
+    visibility: hidden;
+}
+
+/* ── Highlighted day with heart ── */
+.cal-day.highlighted {
+    position: relative;
+}
+
+.heart-cell {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+}
+
+.heart-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 44px;
+    height: 44px;
+    animation: heartbeat 1.8s ease-in-out infinite;
+}
+
+.heart-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: 400;
+    color: #1a1a1a;
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Heartbeat animation ── */
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    15%  { transform: scale(1.18); }
+    30%  { transform: scale(1); }
+    45%  { transform: scale(1.1); }
+    60%  { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* ── Scroll animations ── */
+.animate-from-top {
+    opacity: 0;
+    transform: translateY(-32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-from-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.75s ease 0.2s, transform 0.75s ease 0.2s;
+}
+
+.animate-from-bottom {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.85s ease 0.35s, transform 0.85s ease 0.35s;
+}
+
+.animate-from-top.visible,
+.animate-from-left.visible,
+.animate-from-bottom.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
