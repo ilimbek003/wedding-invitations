@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.044465a0.css",
+    "main.js": "/static/js/main.8741c662.js",
+    "static/media/video.mp4": "/static/media/video.6b559bebbaa61f3aac36.mp4",
+    "static/media/media.mp4": "/static/media/media.748a72f4c926539fea2b.mp4",
+    "static/media/photo_2026-04-27_03-55-54.jpg": "/static/media/photo_2026-04-27_03-55-54.35103c4224666e0c35b2.jpg",
+    "static/media/suit2.jpeg": "/static/media/suit2.ce48b99ca99cf7e008ce.jpeg",
+    "static/media/photo_2026-04-27_03-43-50.jpg": "/static/media/photo_2026-04-27_03-43-50.22ec10378bcf8cf1618d.jpg",
+    "static/media/dress1.jpg": "/static/media/dress1.57d787e1ec4f73ad8d8c.jpg",
+    "static/media/dress3.jpg": "/static/media/dress3.8aadd1011676e9280076.jpg",
+    "static/media/suit1.jpg": "/static/media/suit1.ac3938f6b901615724fc.jpg",
+    "static/media/1.png": "/static/media/1.faeb70523f793724ba18.png",
+    "static/media/dress4.jpeg": "/static/media/dress4.a51fd7e24472a0949752.jpeg",
+    "static/media/dress2.webp": "/static/media/dress2.082e9dee4affe5b5d2d4.webp",
+    "static/media/photo.png.webp": "/static/media/photo.png.f87937c059ef69f50b43.webp",
+    "static/media/img.png .webp": "/static/media/img.png .39baeb94c8c2db91931e.webp",
+    "index.html": "/index.html",
+    "main.044465a0.css.map": "/static/css/main.044465a0.css.map",
+    "main.8741c662.js.map": "/static/js/main.8741c662.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.044465a0.css",
+    "static/js/main.8741c662.js"
+  ]
+}
